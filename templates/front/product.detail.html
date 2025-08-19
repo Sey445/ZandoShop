@@ -1,0 +1,29 @@
+{% extends 'master.html' %}
+{% block content %}
+<div class="container my-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="{{ product.image }}" alt="{{ product.title }}" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6 d-flex flex-column justify-content-center">
+                    <span class="badge bg-primary align-self-start mb-2">{{ product.category }}</span>
+                    <h2>{{ product.title }}</h2>
+                    <p class="lead text-muted">{{ product.description }}</p>
+                    <h3 class="my-3">${{ "%.2f"|format(product.price) }}</h3>
+                    <form action="{{ url_for('add_to_cart') }}" method="POST">
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <div class="d-flex">
+                            <input type="number" name="quantity" class="form-control me-3" value="1" min="1" style="width: 80px;">
+                            <button type="submit" class="btn btn-dark w-100">
+                                <i class="fas fa-shopping-bag me-2"></i>Add to Cart
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

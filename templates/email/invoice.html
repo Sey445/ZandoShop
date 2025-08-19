@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Order Invoice</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px;">
+    <div style="max-width: 700px; margin: auto; background-color: white; padding: 30px; border-radius: 8px;">
+        <h2 style="text-align: center; color: #333;">Invoice</h2>
+        <p style="text-align: center; color: #777;">Thank you for your order, {{ full_name }}!</p>
+
+        <!-- Customer Info -->
+        <h4>Customer Information</h4>
+        <p><strong>Name:</strong> {{ order.full_name }}</p>
+        <p><strong>Email:</strong> {{ order.email }}</p>
+        <p><strong>Phone:</strong> {{ order.phone }}</p>
+        <p><strong>Address:</strong> {{ order.address }}</p>
+        <p><strong>Payment Method:</strong>
+            {% if order.payment_method == 'credit_card' %}
+                Credit Card
+            {% elif order.payment_method == 'Cash On Delivery' %}
+                Cash on Delivery
+            {% else %}
+                {{ order.payment_method }}
+            {% endif %}
+        </p>
+
+        <!-- Invoice Info -->
+        <h4>Invoice Summary</h4>
+        <p><strong>Date:</strong> {{ now.strftime('%B %d, %Y') }}</p>
+        <p><strong>Invoice #:</strong> INV{{ now.strftime('%Y%m%d%H%M%S') }}</p>
+
+        <!-- Order Details -->
+        <h4>Order Details</h4>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #f0f0f0;">
+                    <th style="text-align: left; padding: 8px;">#</th>
+                    <th style="text-align: left; padding: 8px;">Product</th>
+                    <th style="text-align: center; padding: 8px;">Qty</th>
+                    <th style="text-align: right; padding: 8px;">Price</th>
+                    <th style="text-align: right; padding: 8px;">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td style="padding: 8px;">{{ loop.index }}</td>
+                    <td style="padding: 8px;">{{ item.product.title }}</td>
+                    <td style="padding: 8px; text-align: center;">{{ item.quantity }}</td>
+                    <td style="padding: 8px; text-align: right;">${{ "%.2f"|format(item.product.price) }}</td>
+                    <td style="padding: 8px; text-align: right;">${{ "%.2f"|format(item.product.price * item.quantity) }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="4" style="padding: 8px; text-align: right;"><strong>Total:</strong></td>
+                    <td style="padding: 8px; text-align: right;"><strong>${{ "%.2f"|format(total_price) }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Notes -->
+        <p style="margin-top: 20px;"><strong>Note:</strong> A confirmation email has been sent to {{ order.email }}.</p>
+        <p>We will process your order shortly. For questions, please contact support.</p>
+
+        <div style="margin-top: 30px; text-align: center; color: #aaa; font-size: 12px;">
+            &copy; {{ now.year }} ZandoStore. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+        .product-card {
+            /*border: solid 0.5px #6c757d;*/
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #ffffff;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            margin-bottom: 24px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card .product-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #dc3545;
+            color: #fff;
+            padding: 5px 12px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 5px;
+            z-index: 10;
+        }
+
+        .product-card-body {
+            padding: 1rem;
+        }
+
+        .product-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .product-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .current-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #dc3545;
+        }
+
+        .original-price {
+            font-size: 1rem;
+            color: #6c757d;
+            text-decoration: line-through;
+        }
+
+        .product-name {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #212529;
+            margin: 0;
+        }
+
+        .wishlist-icon {
+            font-size: 1.5rem;
+            color: #6c757d;
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .wishlist-icon:hover {
+            color: #dc3545; /* Red on hover */
+            transform: scale(1.1);
+        }
+
+        .product-name {
+            display: -webkit-box;
+            -webkit-line-clamp: 1; /* Show 2 lines */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .product-description {
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* Show 2 lines */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+

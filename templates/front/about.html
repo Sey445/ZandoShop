@@ -1,0 +1,46 @@
+{% extends 'master.html' %}
+{% block content %}
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold display-5">Meet the Team Behind ZANDO</h2>
+        <p class="text-muted">We’re a team of developers, designers, and dreamers building modern e-commerce experiences.</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        <!-- Team Member Card -->
+        {% set members = [
+            {"name": "Oul Rangsey", "role": "Lead Developer & Project Coordinator", "desc": "Passionate about backend and system design.", "img": "/static/img/3.jpg"},
+            {"name": "Touch Sitipol", "role": "Frontend Designer & UX Specialist", "desc": "Loves crafting beautiful and intuitive UIs.", "img": "/static/img/2.jpg"},
+            {"name": "Meng Lyhour", "role": "Database & API Integrator", "desc": "Specializes in backend logic, database, and API connections.", "img": "/static/img/4.jpg"},
+            {"name": "Koem Sophanlanzi", "role": "Tester & Deployment Manager", "desc": "Handles QA, testing, and cloud deployment.", "img": "/static/img/7.JPG"}
+        ] %}
+
+        {% for member in members %}
+        <div class="col-md-6 col-lg-3">
+            <div class="card team-card h-100 text-center border-0 shadow-sm p-2">
+                <img src="{{ member.img }}" class="rounded-circle mx-auto mt-4" style="width:130px; height:130px; object-fit:cover;" alt="{{ member.name }}">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">{{ member.name }}</h5>
+                    <h6 class="text-muted mb-2" style="font-size: 0.9rem;">{{ member.role }}</h6>
+                    <p class="card-text text-secondary" style="font-size: 0.85rem;">{{ member.desc }}</p>
+                </div>
+                <div class="card-footer bg-white border-0">
+                    <a href="#" class="text-muted me-2"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-muted me-2"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-muted"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Optional custom styles -->
+<style>
+    .team-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        transition: 0.3s ease-in-out;
+    }
+</style>
+{% endblock %}

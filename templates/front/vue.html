@@ -1,0 +1,142 @@
+{% extends 'front/master.html' %}
+{% block content %}
+<div id="app" style="padding-top: 40px; padding-bottom: 40px;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4">
+                <div class="card-body" style="padding: 2rem;">
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label>Full Name </label>
+                        <input v-model="name" type="text" name="name" class="form-control">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label>Gender </label>
+                        <select v-model="gender" class="form-control" >
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label>Age </label>
+                        <input v-model="age" type="number" name="age" class="form-control">
+                    </div>
+                    <!-- Conditional rendering for Save vs. Update button -->
+                    <input v-if="!isEditing" @click="saveRecord" type="button" class="btn btn-primary" value="Save" style="padding: 0.2rem 1rem; font-weight: 600; transition: all 0.2s ease-in-out; margin-right: 0.5rem;">
+                    <input v-else @click="updateRecord" type="button" class="btn btn-warning" value="Update" style="padding: 0.2rem 1rem; font-weight: 600; transition: all 0.2s ease-in-out; margin-right: 0.5rem;">
+
+                    <input @click="clearForm" type="button" class="btn btn-danger" value="Cancel" style="padding: 0.2rem 1rem; font-weight: 600; transition: all 0.2s ease-in-out; margin-right: 0.5rem;">
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card-body" style="padding: 2rem;">
+                    <table class="table table-borderless table-striped">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Age</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(user, index) in user_list" :key="index">
+                                <td>[[ index + 1 ]]</td>
+                                <td>[[ user.name ]]</td>
+                                <td>[[ user.gender ]]</td>
+                                <td>[[ user.age ]]</td>
+                                <td>
+                                    <input @click="editRecord(index)" type="button" class="btn btn-sm btn-primary" value="Edit" style="padding: 0.2rem 1rem; font-weight: 600; transition: all 0.2s ease-in-out; margin-right: 0.5rem;">
+                                    <input @click="deleteRecord(index)" type="button" class="btn btn-sm btn-danger" value="Delete" style="padding: 0.2rem 1rem; font-weight: 600; transition: all 0.2s ease-in-out; margin-right: 0.5rem;">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+{% endblock %}
+
+{% block custom_script %}
+<script>
+  const { createApp, ref } = Vue
+
+  createApp({
+    delimiters: ['[[', ']]'],
+    data() {
+      return {
+        name: '',
+        gender: 'male',
+        age: '',
+        user_list: [],
+        isEditing: false, // Flag to check if we are in edit mode
+        editingIndex: -1  // Stores the index of the user being edited
+      }
+    },
+    methods: {
+      // Method to save a new record
+      saveRecord() {
+        if (!this.name || !this.age) {
+          console.log("Please enter name and age");
+          return;
+        }
+
+        this.user_list.push({
+          name: this.name,
+          gender: this.gender,
+          age: this.age
+        });
+
+        this.clearForm();
+      },
+      // Method to clear the form fields
+      clearForm() {
+        this.name = '';
+        this.gender = 'male';
+        this.age = '';
+        this.isEditing = false;
+        this.editingIndex = -1;
+      },
+      // Method to delete a record
+      deleteRecord(index) {
+        // Remove one element at the specified index
+        this.user_list.splice(index, 1);
+      },
+      // Method to populate the form for editing
+      editRecord(index) {
+        // Set the editing flag to true
+        this.isEditing = true;
+        // Store the index of the user being edited
+        this.editingIndex = index;
+        // Get the user data from the array
+        const user = this.user_list[index];
+        // Populate the form fields with the user's data
+        this.name = user.name;
+        this.gender = user.gender;
+        this.age = user.age;
+      },
+      // Method to update an existing record
+      updateRecord() {
+        if (!this.name || !this.age) {
+          console.log("Please enter name and age");
+          return;
+        }
+
+        // Update the user data at the stored index
+        this.user_list[this.editingIndex] = {
+          name: this.name,
+          gender: this.gender,
+          age: this.age
+        };
+
+        // Clear the form and reset the editing state
+        this.clearForm();
+      }
+    }
+  }).mount('#app')
+</script>
+{% endblock %}
