@@ -84,6 +84,9 @@ PRODUCTS = {
 # ==============================================================================
 # 3. ROUTES
 # ==============================================================================
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
 
 @app.route('/')
 def home():
@@ -111,16 +114,6 @@ def about():
 @app.route('/support')
 def support():
     return render_template("front/support.html")
-
-
-@app.route('/')
-def home():
-    return "Hello, Render!"
-
-
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
 
 
 @app.route('/cart')
