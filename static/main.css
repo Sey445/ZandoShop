@@ -229,3 +229,52 @@
     margin-right: 10px;
     margin-bottom: 10px;
 }
+
+/* Make search bar full width on small screens */
+@media (max-width: 576px) {
+    .search-form {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+    .search-form .form-control {
+        padding-left: 35px;
+        font-size: 0.9rem;
+    }
+    .navbar-nav {
+        text-align: center;
+    }
+}
+
+/* Product card adjustments for small screens */
+@media (max-width: 576px) {
+    .product-card-body {
+        padding: 1rem;
+    }
+    .product-name {
+        font-size: 0.9rem;
+        height: auto; /* Allow name to wrap on small screens */
+    }
+    .product-price .current-price {
+        font-size: 1em;
+    }
+}
+
+/* Navbar icons spacing on small screens */
+@media (max-width: 576px) {
+    .navbar-nav .nav-item {
+        margin-bottom: 0.3rem;
+    }
+}
+
+
+        /* Responsive styles for phones */
+@media (max-width: 576px) {
+    .search-form { width: 100%; margin: 0.5rem 0; }
+    .search-form .form-control { padding-left: 35px; font-size: 0.9rem; }
+    .navbar-nav { text-align: center; }
+    .product-card-body { padding: 1rem; }
+    .product-name { font-size: 0.9rem; height: auto; }
+    .product-price .current-price { font-size: 1em; }
+    .navbar-nav .nav-item { margin-bottom: 0.3rem; }
+    .cart-badge { top: -2px; right: -5px; padding: 1px 5px; font-size: 9px; }
+}
