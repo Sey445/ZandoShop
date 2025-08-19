@@ -197,15 +197,15 @@ def send_email_invoice(order):
     msg = Message(
         subject="Your Order Invoice",
         recipients=[order["email"]],
-        sender="your_email@gmail.com"
+        sender="Seyhour4@gmail.com"
     )
     msg.html = html_body
 
     try:
         mail.send(msg)
-        print("Invoice email sent!")
+        print("✅ Invoice email sent!")
     except Exception as e:
-        print("Failed to send email:", e)
+        print("❌ Failed to send email:", e)
 
 
 def send_telegram_notification(order):
